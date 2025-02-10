@@ -4,24 +4,27 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
-	initializer "github.com/prasad89/devspace-api/initializers"
+	"github.com/prasad89/devspace-api/controllers"
+	"github.com/prasad89/devspace-api/initializers"
 )
 
+func init() {
+	initializers.ConnectDB()
+}
+
 func main() {
-	// Connect to the database
-	_, err := initializer.ConnectDB()
-	if err != nil {
-		log.Fatal("❌ Database connection failed:", err)
-	}
 	log.Println("✅ Database initialized successfully!")
 
 	// Create Gin router
 	r := gin.Default()
 
-	// Example health check endpoint
+	// Health check endpoint
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"message": "DevSpace API is running!"})
 	})
+
+	// Register routes
+	r.POST("/login", controllers.Login)
 
 	// Start API server
 	log.Println("🚀 Starting server on port 8080...")
