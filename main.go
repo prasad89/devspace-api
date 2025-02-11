@@ -8,6 +8,7 @@ import (
 	"github.com/prasad89/devspace-api/initializers"
 )
 
+// Initialize database connection
 func init() {
 	initializers.ConnectDB()
 }

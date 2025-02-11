@@ -4,14 +4,16 @@ import (
 	"github.com/prasad89/devspace-api/initializers"
 )
 
-type Developer struct {
+// User struct to hold user details
+type User struct {
 	ID       uint   `json:"id" gorm:"primaryKey"`
 	Username string `json:"username" gorm:"unique"`
 	Password string `json:"password"`
 }
 
-func GetByUsername(username string) (Developer, error) {
-	var developer Developer
-	result := initializers.DB.Where("username = ?", username).First(&developer)
-	return developer, result.Error
+// GetByUsername fetches a user by username
+func GetByUsername(username string) (User, error) {
+	var user User
+	result := initializers.DB.Where("username = ?", username).First(&user)
+	return user, result.Error
 }
