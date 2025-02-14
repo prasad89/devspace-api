@@ -1,8 +1,6 @@
 package models
 
-import (
-	"github.com/prasad89/devspace-api/initializers"
-)
+import "gorm.io/gorm"
 
 // User struct to hold user details
 type User struct {
@@ -11,9 +9,9 @@ type User struct {
 	Password string `json:"password"`
 }
 
-// GetByUsername fetches a user by username
-func GetByUsername(username string) (User, error) {
+// GetByUsername fetches a user by username using a passed database instance
+func GetByUsername(db *gorm.DB, username string) (User, error) {
 	var user User
-	result := initializers.DB.Where("username = ?", username).First(&user)
+	result := db.Where("username = ?", username).First(&user)
 	return user, result.Error
 }

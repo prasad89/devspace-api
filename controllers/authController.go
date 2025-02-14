@@ -6,11 +6,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/prasad89/devspace-api/initializers"
 	"github.com/prasad89/devspace-api/models"
 )
 
 // SecretKey to sign JWT
-var SecretKey = []byte("secret") // Currently hardcoded but in k8s environment, it should be stored in a secret and accessed from there
+var SecretKey = []byte("secret") // In production, store this in a secure environment (e.g., K8s Secret)
 
 // Auth struct to hold login credentials
 type Auth struct {
@@ -22,11 +23,11 @@ type Auth struct {
 func Login(c *gin.Context) {
 	var auth Auth
 	if err := c.ShouldBindJSON(&auth); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request format"})
 		return
 	}
 
-	user, err := models.GetByUsername(auth.Username)
+	user, err := models.GetByUsername(initializers.DB, auth.Username)
 	if err != nil || user.Password != auth.Password {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		return

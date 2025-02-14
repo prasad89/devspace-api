@@ -29,7 +29,7 @@ func ConnectDB() {
 
 	var err error
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
+		Logger: logger.Default.LogMode(logger.Error),
 	})
 	if err != nil {
 		log.Fatal("❌ Failed to connect to PostgreSQL:", err)
@@ -37,4 +37,12 @@ func ConnectDB() {
 	}
 
 	log.Println("✅ Connected to PostgreSQL successfully!")
+}
+
+// GetEnv fetches an environment variable or returns a default value if not set.
+func GetEnv(key, defaultValue string) string {
+	if value, exists := os.LookupEnv(key); exists {
+		return value
+	}
+	return defaultValue
 }
