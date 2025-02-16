@@ -1,10 +1,13 @@
 package models
 
 // DevSpac struct to hold devspace details
-type DevSpace struct {
-	ID   uint   `json:"id" gorm:"primaryKey"`
-	User string `json:"user"`
-	Name string `json:"name"`
+type Devspace struct {
+	ID    uint   `json:"id" gorm:"primaryKey"`
+	Owner string `gorm:"uniqueIndex:owner_name_unique"`
+	Name  string `gorm:"uniqueIndex:owner_name_unique"`
+}
 
-	UniqueIndex string `gorm:"uniqueIndex:user_name_unique" json:"-"`
+// DevSpac struct to hold devspace details
+type DevspaceResponse struct {
+	Name string `json:"name"`
 }

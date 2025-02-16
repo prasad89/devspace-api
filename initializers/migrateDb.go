@@ -8,7 +8,7 @@ import (
 
 // MigrateDB applies database migrations for the DevSpace model.
 func MigrateDB() {
-	if err := DB.AutoMigrate(&models.DevSpace{}); err != nil {
+	if err := DB.AutoMigrate(&models.Devspace{}); err != nil {
 		log.Fatal("❌ Failed to migrate database:", err)
 	}
 	log.Println("✅ Database migrated successfully!")

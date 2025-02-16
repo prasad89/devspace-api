@@ -16,13 +16,20 @@ func GetDevSpaces(c *gin.Context) {
 		return
 	}
 
-	var devspaces []models.DevSpace
-	results := initializers.DB.Where("user=?", username).Find(&devspaces)
+	var devspaces []models.Devspace
+	results := initializers.DB.Select("name").Where("owner=?", username).Find(&devspaces)
 
 	if results.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch devspaces"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"devspaces": devspaces})
+	var devspaceResponses []models.DevspaceResponse
+	for _, devspace := range devspaces {
+		devspaceResponses = append(devspaceResponses, models.DevspaceResponse{
+			Name: devspace.Name,
+		})
+	}
+
+	c.JSON(http.StatusOK, gin.H{"devspaces": devspaceResponses})
 }
