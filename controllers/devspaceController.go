@@ -8,28 +8,51 @@ import (
 	"github.com/prasad89/devspace-api/models"
 )
 
-// GetDevSpaces retrieves all devspaces for the logged-in user
-func GetDevSpaces(c *gin.Context) {
+// GetDevspaces retrieves all devspaces for the logged-in user
+func GetDevspaces(c *gin.Context) {
 	username, exist := c.Get("username")
 	if !exist {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
 		return
 	}
 
-	var devspaces []models.Devspace
-	results := initializers.DB.Select("name").Where("owner=?", username).Find(&devspaces)
-
-	if results.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch devspaces"})
+	devspaces, err := models.GetDevspacesByOwner(initializers.DB, c, username.(string))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to get devspaces"})
 		return
 	}
 
-	var devspaceResponses []models.DevspaceResponse
-	for _, devspace := range devspaces {
-		devspaceResponses = append(devspaceResponses, models.DevspaceResponse{
-			Name: devspace.Name,
-		})
+	c.JSON(http.StatusOK, gin.H{"devspaces": devspaces})
+}
+
+// // CreateDevspace creates a new DevSpace instance
+func CreateDevspace(c *gin.Context) {
+	username, exist := c.Get("username")
+	if !exist {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"devspaces": devspaceResponses})
+	var req struct {
+		Name string `json:"name" binding:"required"`
+	}
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
+		return
+	}
+
+	devspace := models.Devspace{
+		Owner: username.(string),
+		Name:  req.Name,
+	}
+
+	if err := initializers.DB.Create(&devspace).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Devspace with same name already exists"})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "Devspace created successfully",
+	})
 }

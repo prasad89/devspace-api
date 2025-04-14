@@ -33,9 +33,10 @@ func main() {
 	protected := r.Group("/")
 	protected.Use(middlewares.AuthMiddleware())
 
-	protected.GET("/devspaces", controllers.GetDevSpaces)
+	protected.GET("/devspaces", controllers.GetDevspaces)
+	protected.POST("/devspace", controllers.CreateDevspace)
 
 	// Start API server
-	log.Println("🚀 Starting server on port 8080...")
+	log.Println("🚀 Started server on port 8080...")
 	log.Fatal(r.Run(":8080"))
 }
