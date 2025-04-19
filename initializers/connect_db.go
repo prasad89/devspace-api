@@ -32,11 +32,11 @@ func ConnectDB() {
 		Logger: logger.Default.LogMode(logger.Error),
 	})
 	if err != nil {
-		log.Fatal("❌ Failed to connect to PostgreSQL:", err)
+		log.Fatal("❌ Failed to connect to Database:", err)
 		os.Exit(1)
 	}
 
-	log.Println("✅ Connected to PostgreSQL successfully!")
+	log.Println("✅ Connected to Database successfully!")
 }
 
 // GetEnv fetches an environment variable or returns a default value if not set.

@@ -25,7 +25,7 @@ func GetDevspaces(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"devspaces": devspaces})
 }
 
-// // CreateDevspace creates a new DevSpace instance
+// CreateDevspace creates a new DevSpace instance
 func CreateDevspace(c *gin.Context) {
 	username, exist := c.Get("username")
 	if !exist {

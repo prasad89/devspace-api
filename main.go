@@ -16,8 +16,6 @@ func init() {
 }
 
 func main() {
-	log.Println("✅ Database initialized successfully!")
-
 	// Create Gin router
 	r := gin.Default()
 

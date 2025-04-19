@@ -13,22 +13,22 @@ import (
 // SecretKey to sign JWT
 var SecretKey = []byte("secret") // In production, store this in a secure environment (e.g., K8s Secret)
 
-// Auth struct to hold login credentials
-type Auth struct {
+// Credentials struct to hold login credentials
+type Credentials struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
 // Login authenticates the user
 func Login(c *gin.Context) {
-	var auth Auth
-	if err := c.ShouldBindJSON(&auth); err != nil {
+	var Credentials Credentials
+	if err := c.ShouldBindJSON(&Credentials); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request format"})
 		return
 	}
 
-	user, err := models.GetByUsername(initializers.DB, auth.Username)
-	if err != nil || user.Password != auth.Password {
+	user, err := models.GetByUsername(initializers.DB, Credentials.Username)
+	if err != nil || user.Password != Credentials.Password {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		return
 	}
