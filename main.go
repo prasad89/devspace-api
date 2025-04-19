@@ -13,6 +13,7 @@ import (
 func init() {
 	initializers.ConnectDB()
 	initializers.MigrateDB()
+	initializers.InitDevspaceClient()
 }
 
 func main() {
