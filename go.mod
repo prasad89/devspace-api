@@ -4,7 +4,7 @@ go 1.23.3
 
 require (
 	github.com/golang-jwt/jwt/v5 v5.2.1
-	github.com/prasad89/devspace-operator v0.0.0-20250419171543-fc4e75f22b02
+	github.com/prasad89/devspace-operator v0.0.0-20250420052807-8cf60a78b2be
 	gorm.io/driver/postgres v1.5.11
 	k8s.io/apimachinery v0.32.3
 	k8s.io/client-go v0.32.3

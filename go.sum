@@ -114,8 +114,8 @@ github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/prasad89/devspace-operator v0.0.0-20250419171543-fc4e75f22b02 h1:/zP1Ec6bPdJ1Q68LeE188zFELWX0v5hssGQ0EGvtLkI=
-github.com/prasad89/devspace-operator v0.0.0-20250419171543-fc4e75f22b02/go.mod h1:mwMD2HP0Vk5Yg2cQ05cjXamxu5nBs5tadgft+aGsV10=
+github.com/prasad89/devspace-operator v0.0.0-20250420052807-8cf60a78b2be h1:2fkS/RvDjhFvCARwSJu5OZVrPpOQZL8+7JQyzNbuyrY=
+github.com/prasad89/devspace-operator v0.0.0-20250420052807-8cf60a78b2be/go.mod h1:mwMD2HP0Vk5Yg2cQ05cjXamxu5nBs5tadgft+aGsV10=
 github.com/rogpeppe/go-internal v1.13.1 h1:KvO1DLK/DRN07sQ1LQKScxyZJuNnedQ5/wKSR38lUII=
 github.com/rogpeppe/go-internal v1.13.1/go.mod h1:uMEvuHeurkdAXX61udpOXGD/AzZDWNMNyH2VO9fmH0o=
 github.com/spf13/pflag v1.0.5 h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA=

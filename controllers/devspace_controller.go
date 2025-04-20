@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -61,9 +60,6 @@ func CreateDevspace(c *gin.Context) {
 			Name:      req.Name,
 			Namespace: username.(string),
 		},
-		Spec: devspacev1alpha1.DevSpaceSpec{
-			Owner: username.(string),
-		},
 	}
 
 	_, err := initializers.DevspaceClient.
@@ -71,9 +67,7 @@ func CreateDevspace(c *gin.Context) {
 		DevSpaces(username.(string)).
 		Create(context.TODO(), devspaceCR, metav1.CreateOptions{})
 
-
 	if err != nil {
-		fmt.Println(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create DevSpace in Kubernetes"})
 		return
 	}
